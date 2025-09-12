@@ -15,11 +15,9 @@ public class ProductoData {
     public static TreeSet<Producto> lista = new TreeSet();
          
        
-    public static void guardarProducto (){
-       
-        
-    lista.add(new Producto(123,"rojo",12.1,COMESTIBLE,5));
-    lista.add(new Producto(121233,"roasdsajo",12.2131,COMESTIBLE,54));
+    public static void guardarProducto (Producto aux){
+       lista.add(aux);
+   
     
     }
    

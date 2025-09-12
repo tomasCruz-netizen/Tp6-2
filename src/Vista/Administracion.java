@@ -9,6 +9,10 @@ import Data.ProductoData;
 import Data.Rubro;
 import Entidades.Producto;
 import java.util.ArrayList;
+import javafx.scene.control.Spinner;
+import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,7 +27,9 @@ public class Administracion extends javax.swing.JInternalFrame {
         modelo = new DefaultTableModel();
         cargarEncabezado();
         llenarCombo();
+        llenarCombo1();
         llenarTabla();
+      
     }
 
     /**
@@ -54,7 +60,7 @@ public class Administracion extends javax.swing.JInternalFrame {
         comboRubro = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
@@ -67,6 +73,11 @@ public class Administracion extends javax.swing.JInternalFrame {
         comboRubro2.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboRubro2ItemStateChanged(evt);
+            }
+        });
+        comboRubro2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboRubro2ActionPerformed(evt);
             }
         });
 
@@ -93,6 +104,19 @@ public class Administracion extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Stock");
 
+        spinStock.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        comboRubro.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboRubroItemStateChanged(evt);
+            }
+        });
+        comboRubro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboRubroActionPerformed(evt);
+            }
+        });
+
         jButton1.setText("Cerrar");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -112,11 +136,11 @@ public class Administracion extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(9, 9, 9)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(spinStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCodigo)
                     .addComponent(txtDescripcion)
                     .addComponent(txtPrecio)
-                    .addComponent(comboRubro, 0, 163, Short.MAX_VALUE))
+                    .addComponent(comboRubro, 0, 163, Short.MAX_VALUE)
+                    .addComponent(spinStock, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(89, 89, 89)
                 .addComponent(jButton1)
                 .addGap(65, 65, 65))
@@ -155,7 +179,12 @@ public class Administracion extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setText("Guardar");
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Actualizar");
 
@@ -174,22 +203,19 @@ public class Administracion extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(36, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap())
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
-                            .addContainerGap())
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addContainerGap()))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(57, 57, 57))))
@@ -209,7 +235,7 @@ public class Administracion extends javax.swing.JInternalFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton3)
+                    .addComponent(btnGuardar)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
                 .addContainerGap(59, Short.MAX_VALUE))
@@ -239,16 +265,44 @@ public class Administracion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void comboRubro2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboRubro2ItemStateChanged
-        llenarTabla();
+     llenarTabla();
     }//GEN-LAST:event_comboRubro2ItemStateChanged
+
+    private void comboRubroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboRubroItemStateChanged
+        
+    }//GEN-LAST:event_comboRubroItemStateChanged
+
+    private void comboRubro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboRubro2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboRubro2ActionPerformed
+
+    private void comboRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboRubroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboRubroActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        int codigo = Integer.parseInt(txtCodigo.getText());
+        double precio = Double.parseDouble(txtPrecio.getText());
+        int stock = (int) spinStock.getValue();
+        
+        Rubro rubro = (Rubro) comboRubro.getSelectedItem();
+        //Producto nu = new Producto(codigo,txtDescripcion.getText(),precio,rubro,stock);
+       // ProductoData.guardarProducto(aux);
+       ProductoData.lista.add(new Producto(codigo,txtDescripcion.getText(),precio,rubro,stock));
+      /*  if(ProductoData.lista.contains(nu)){
+        JOptionPane.showMessageDialog(null,"Se guardar correctamente");
+        }else{
+        JOptionPane.showMessageDialog(null, "No se guardo..");
+        }*/
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> comboRubro;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JComboBox<Rubro> comboRubro;
     private javax.swing.JComboBox<String> comboRubro2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -261,7 +315,7 @@ public class Administracion extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner spinStock;
+    public javax.swing.JSpinner spinStock;
     private javax.swing.JTable tablaDeProductos;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDescripcion;
@@ -309,5 +363,11 @@ public void llenarTabla(){
     comboRubro2.addItem(Rubro.PERFUMERIA +" ");
     comboRubro2.addItem(Rubro.LIMPIEZA +" ");
     
+    }
+    // para llenar el combo dos 
+    private void llenarCombo1(){
+    comboRubro.addItem(Rubro.COMESTIBLE);
+    comboRubro.addItem(Rubro.PERFUMERIA);
+    comboRubro.addItem(Rubro.LIMPIEZA);
     }
 }
