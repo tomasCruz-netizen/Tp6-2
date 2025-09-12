@@ -1,6 +1,7 @@
 
 package Entidades;
 
+import Data.Rubro;
 import java.util.Objects;
 
 /**
@@ -9,32 +10,26 @@ import java.util.Objects;
  */
 public class Producto {
     
-    private int idProducto;
+    
     private int codigo;
     private String descripcion;
     private double precio;
-    private Categoria categoria;
+    private Rubro rubro;
     private int stock;
 
     public Producto() {}
 
     
-    public Producto(int idProducto, int codigo, String descripcion, double precio, Categoria categoria, int stock) {
-        this.idProducto = idProducto;
+    public Producto( int codigo, String descripcion, double precio,Rubro rubro, int stock) {
+      
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.precio = precio;
-        this.categoria = categoria;
+        this.rubro = rubro;
         this.stock = stock;
     }
 
-    public int getIdProducto() {
-        return idProducto;
-    }
-
-    public void setIdProducto(int idProducto) {
-        this.idProducto = idProducto;
-    }
+   
 
     public int getCodigo() {
         return codigo;
@@ -60,13 +55,19 @@ public class Producto {
         this.precio = precio;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public Rubro getRubro() {
+        return rubro;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setRubro(Rubro rubro) {
+        this.rubro = rubro;
     }
+
+    @Override
+    public String toString() {
+        return ", codigo=" + codigo + ", descripcion=" + descripcion + ", precio=" + precio + ", rubro=" + rubro + ", stock=" + stock + '}';
+    }
+
 
     public int getStock() {
         return stock;
@@ -77,16 +78,19 @@ public class Producto {
     }
 
     @Override
-    public String toString() {
-        return  "IdProducto= " + idProducto + ", Codigo= " + codigo + ", Descripcion= " + descripcion + ", Precio= " + precio + ", Categoria= " + categoria + ", Stock= " + stock ;
-    }
-
-    @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 31 * hash + this.idProducto;
+        int hash = 7;
+        hash = 89 * hash + this.codigo;
+        hash = 89 * hash + Objects.hashCode(this.descripcion);
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.precio) ^ (Double.doubleToLongBits(this.precio) >>> 32));
+        hash = 89 * hash + Objects.hashCode(this.rubro);
+        hash = 89 * hash + this.stock;
         return hash;
     }
+
+   
+
+    
 
     @Override
     public boolean equals(Object obj) {
@@ -99,17 +103,10 @@ public class Producto {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Producto other = (Producto) obj;
-        if (this.idProducto != other.idProducto) {
-            return false;
-        }
+        
+        
         return true;
     }
-    
-    
-    
-    
-    
-    
+     
     
 }

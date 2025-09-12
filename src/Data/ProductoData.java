@@ -4,37 +4,29 @@
  * and open the template in the editor.
  */
 package Data;
-
+//NO ME COPUE
+import static Data.ProductoData.lista;
+import static Data.Rubro.COMESTIBLE;
 import Entidades.Producto;
-import java.util.ArrayList;
+import java.util.TreeSet;
 
 
 public class ProductoData {
-    private ArrayList<Producto> lista;
+    public static TreeSet<Producto> lista = new TreeSet();
+         
+       
+    public static void guardarProducto (){
+       
+        
+    lista.add(new Producto(123,"rojo",12.1,COMESTIBLE,5));
+    lista.add(new Producto(121233,"roasdsajo",12.2131,COMESTIBLE,54));
     
-    public void guardarProducto (Producto pro){
-        // Permite crear un id cuando se agrega un producto secuencial mente
-        pro.setIdProducto(lista.size() +1 );
-        lista.add(pro);
     }
-    public ArrayList<Producto> obtenerProducto(){
-    return lista;
-    }
-    public void borrarProducto(Producto p){
+   
+    
+    public static void borrarProducto(Producto p){
         lista.remove(p);
     }
     
-    public void modificarProducto(Producto nuevoProducto){
-      
-        for (Producto producto : lista) {
-            if(producto.getIdProducto()==nuevoProducto.getIdProducto()){
-            producto.setCodigo(nuevoProducto.getCodigo());
-            producto.setDescripcion(nuevoProducto.getDescripcion());
-            producto.setPrecio(nuevoProducto.getPrecio());
-            producto.setStock(nuevoProducto.getStock());
-            
-            break;
-            }
-        }
-    }
+    
 }
