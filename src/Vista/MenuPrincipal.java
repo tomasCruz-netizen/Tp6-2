@@ -125,7 +125,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu2MenuSelected
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
+   
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**

@@ -29,8 +29,7 @@ public class Administracion extends javax.swing.JInternalFrame {
         cargarEncabezado();
         llenarCombo();
         llenarCombo1();
-        llenarTabla();
-        desactivarCampos();
+               desactivarCampos();
        
       
     }
@@ -65,7 +64,7 @@ public class Administracion extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jBEliminar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         jLabel1.setText("Gestion de Producto");
@@ -73,11 +72,6 @@ public class Administracion extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel2.setText("Filtrar por categoria:");
 
-        comboRubro2.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                comboRubro2ItemStateChanged(evt);
-            }
-        });
         comboRubro2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboRubro2ActionPerformed(evt);
@@ -95,6 +89,11 @@ public class Administracion extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         ));
+        tablaDeProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaDeProductosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaDeProductos);
 
         jLabel3.setText("Codigo:");
@@ -112,11 +111,6 @@ public class Administracion extends javax.swing.JInternalFrame {
         comboRubro.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboRubroItemStateChanged(evt);
-            }
-        });
-        comboRubro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboRubroActionPerformed(evt);
             }
         });
 
@@ -202,8 +196,13 @@ public class Administracion extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton5.setText("Eliminar");
-        jButton5.setEnabled(false);
+        jBEliminar.setText("Eliminar");
+        jBEliminar.setEnabled(false);
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -227,7 +226,7 @@ public class Administracion extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
@@ -252,7 +251,7 @@ public class Administracion extends javax.swing.JInternalFrame {
                     .addComponent(jButton2)
                     .addComponent(btnGuardar)
                     .addComponent(btnActualizar)
-                    .addComponent(jButton5))
+                    .addComponent(jBEliminar))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
 
@@ -283,33 +282,44 @@ public class Administracion extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void comboRubro2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboRubro2ItemStateChanged
-     llenarTabla();
-    }//GEN-LAST:event_comboRubro2ItemStateChanged
-
     private void comboRubroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboRubroItemStateChanged
-        
+           llenarTabla();   
     }//GEN-LAST:event_comboRubroItemStateChanged
-
-    private void comboRubro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboRubro2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboRubro2ActionPerformed
-
-    private void comboRubroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboRubroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_comboRubroActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
          
         
-        
+         int codigo3;
+         
          boolean encontrado=false;
         
         
-         int codigo3=Integer.parseInt(txtCodigo.getText());
+         String codigo11=txtCodigo.getText();
+         
+         
         
          
-        for (Producto producto1 : ProductoData.lista) {
+         try{
+         
+         
+         
+         codigo3=Integer.parseInt(codigo11);
+         
+         }catch (NumberFormatException e) {
+         
+         JOptionPane.showMessageDialog(this, "Ingrese un numero válido");
+         
+         txtCodigo.requestFocus();
+         return;
+         
+         
+        
+         
+             
+         }
+         
+         
+           for (Producto producto1 : ProductoData.lista) {
             
            
                        
@@ -321,6 +331,12 @@ public class Administracion extends javax.swing.JInternalFrame {
             }
                     
         }
+         
+         
+         
+        
+         
+       
                 
         
         String codigo1=txtCodigo.getText().trim();
@@ -359,9 +375,16 @@ public class Administracion extends javax.swing.JInternalFrame {
         
         
       double preci;
+      
+      
+      
+  
+      
+      
         
         try{
-        
+            
+    
         preci=Double.parseDouble(precio1);
         
         
@@ -539,15 +562,48 @@ public class Administracion extends javax.swing.JInternalFrame {
      dispose();
     }//GEN-LAST:event_jBCerrarActionPerformed
 
+    private void comboRubro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboRubro2ActionPerformed
+     llenarTabla();       
+    }//GEN-LAST:event_comboRubro2ActionPerformed
+
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+
+
+
+
+int fila=tablaDeProductos.getSelectedRow();
+        
+        if (fila!=-1){
+            modelo.removeRow(fila);
+        
+        
+        } else{
+        
+        JOptionPane.showMessageDialog(this, "Debe seleccionar una fila");
+        }
+
+
+
+        
+        
+        
+        
+      
+    }//GEN-LAST:event_jBEliminarActionPerformed
+
+    private void tablaDeProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDeProductosMouseClicked
+    jBEliminar.setEnabled(true);
+    }//GEN-LAST:event_tablaDeProductosMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<Rubro> comboRubro;
-    private javax.swing.JComboBox<String> comboRubro2;
+    private javax.swing.JComboBox<Rubro> comboRubro2;
     private javax.swing.JButton jBCerrar;
+    private javax.swing.JButton jBEliminar;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -581,11 +637,11 @@ public void cargarEncabezado(){
 
 public void llenarTabla(){
     borrarFilas();
-   String categoria = (String) comboRubro2.getSelectedItem();
+   Rubro categoria = (Rubro) comboRubro2.getSelectedItem();
     
    for (Producto aux : ProductoData.lista) {
        
-    if(aux.getRubro().equals(categoria)){
+    if(aux.getRubro()==categoria){
      modelo.addRow(new Object[]{aux.getCodigo(),aux.getDescripcion(),aux.getRubro(),aux.getPrecio(),aux.getStock()});
        }
     }
@@ -602,9 +658,9 @@ public void llenarTabla(){
 
     private void llenarCombo(){
          
-    comboRubro2.addItem(Rubro.COMESTIBLE +" ");
-    comboRubro2.addItem(Rubro.PERFUMERIA +" ");
-    comboRubro2.addItem(Rubro.LIMPIEZA +" ");
+    comboRubro2.addItem(Rubro.COMESTIBLE);
+    comboRubro2.addItem(Rubro.PERFUMERIA);
+    comboRubro2.addItem(Rubro.LIMPIEZA );
     
     }
     // para llenar el combo dos 

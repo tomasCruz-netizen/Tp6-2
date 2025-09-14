@@ -60,7 +60,7 @@
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="btnActualizar" min="-2" pref="88" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jButton5" min="-2" pref="96" max="-2" attributes="0"/>
+                                  <Component id="jBEliminar" min="-2" pref="96" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jScrollPane1" alignment="1" pref="467" max="32767" attributes="0"/>
                               <Component id="jPanel2" alignment="1" max="32767" attributes="0"/>
@@ -93,7 +93,7 @@
                       <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnActualizar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="59" max="32767" attributes="0"/>
               </Group>
@@ -124,11 +124,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboRubro2ItemStateChanged"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboRubro2ActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Rubro&gt;"/>
           </AuxValues>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -182,6 +181,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tablaDeProductosMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -304,7 +306,6 @@
               </Properties>
               <Events>
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboRubroItemStateChanged"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboRubroActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Rubro&gt;"/>
@@ -345,11 +346,14 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnActualizarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton5">
+        <Component class="javax.swing.JButton" name="jBEliminar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Eliminar"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBEliminarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
