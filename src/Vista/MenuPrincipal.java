@@ -80,6 +80,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu3.setText("Consulta");
 
         jMenuItem5.setText("Consulta por nombre");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem5);
 
         jMenuItem6.setText("Consulta por precio");
@@ -118,6 +123,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
       escritorio.add(administracion);
       escritorio.moveToFront(administracion);
     }//GEN-LAST:event_jMenu2MenuSelected
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments

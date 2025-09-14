@@ -8,7 +8,7 @@ import java.util.Objects;
  *
  * @author Sutara
  */
-public class Producto {
+public class Producto implements Comparable<Producto> {
     
     
     private int codigo;
@@ -79,18 +79,10 @@ public class Producto {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + this.codigo;
-        hash = 89 * hash + Objects.hashCode(this.descripcion);
-        hash = 89 * hash + (int) (Double.doubleToLongBits(this.precio) ^ (Double.doubleToLongBits(this.precio) >>> 32));
-        hash = 89 * hash + Objects.hashCode(this.rubro);
-        hash = 89 * hash + this.stock;
+        int hash = 3;
+        hash = 53 * hash + this.codigo;
         return hash;
     }
-
-   
-
-    
 
     @Override
     public boolean equals(Object obj) {
@@ -103,10 +95,18 @@ public class Producto {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        
-        
+        final Producto other = (Producto) obj;
+        if (this.codigo != other.codigo) {
+            return false;
+        }
         return true;
     }
-     
+
+   
+
+    @Override
+    public int compareTo(Producto t) {
+return Integer.compare(this.codigo, t.codigo);
+    }
     
 }

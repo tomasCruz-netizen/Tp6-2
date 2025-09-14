@@ -13,11 +13,17 @@ import java.util.TreeSet;
 
 public class ProductoData {
     public static TreeSet<Producto> lista = new TreeSet();
+    
+    
+    
+    
          
        
     public static void guardarProducto (Producto aux){
        lista.add(aux);
   
+       
+        
     }
    
     

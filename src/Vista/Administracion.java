@@ -6,6 +6,7 @@
 package Vista;
 
 import Data.ProductoData;
+import static Data.ProductoData.lista;
 import Data.Rubro;
 import Entidades.Producto;
 import java.util.ArrayList;
@@ -29,6 +30,8 @@ public class Administracion extends javax.swing.JInternalFrame {
         llenarCombo();
         llenarCombo1();
         llenarTabla();
+        desactivarCampos();
+       
       
     }
 
@@ -58,10 +61,10 @@ public class Administracion extends javax.swing.JInternalFrame {
         txtDescripcion = new javax.swing.JTextField();
         txtPrecio = new javax.swing.JTextField();
         comboRubro = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        jBCerrar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
@@ -117,7 +120,12 @@ public class Administracion extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("Cerrar");
+        jBCerrar.setText("Cerrar");
+        jBCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCerrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -142,7 +150,7 @@ public class Administracion extends javax.swing.JInternalFrame {
                     .addComponent(comboRubro, 0, 163, Short.MAX_VALUE)
                     .addComponent(spinStock, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(89, 89, 89)
-                .addComponent(jButton1)
+                .addComponent(jBCerrar)
                 .addGap(65, 65, 65))
         );
         jPanel2Layout.setVerticalGroup(
@@ -167,7 +175,7 @@ public class Administracion extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(comboRubro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jBCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel7))))
         );
@@ -180,15 +188,22 @@ public class Administracion extends javax.swing.JInternalFrame {
         });
 
         btnGuardar.setText("Guardar");
+        btnGuardar.setEnabled(false);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Actualizar");
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Eliminar");
+        jButton5.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -210,7 +225,7 @@ public class Administracion extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
@@ -236,7 +251,7 @@ public class Administracion extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(btnGuardar)
-                    .addComponent(jButton4)
+                    .addComponent(btnActualizar)
                     .addComponent(jButton5))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
@@ -261,7 +276,11 @@ public class Administracion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+      activaCampos();
+      
+      btnGuardar.setEnabled(true);
+        
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void comboRubro2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboRubro2ItemStateChanged
@@ -281,45 +300,253 @@ public class Administracion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboRubroActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-       /* int codigo = Integer.parseInt(txtCodigo.getText());
-        double precio = Double.parseDouble(txtPrecio.getText());
+         
         
-        int stock = (int) spinStock.getValue();
         
-        Rubro rubro = (Rubro) comboRubro.getSelectedItem();
-        Producto nu = new Producto(codigo,txtDescripcion.getText(),precio,rubro,stock);
-       ProductoData.guardarProducto(nu);
-     //  ProductoData.lista.add(new Producto(codigo,txtDescripcion.getText(),precio,rubro,stock));
-      /*  if(ProductoData.lista.contains(nu)){
-        JOptionPane.showMessageDialog(null,"Se guardar correctamente");
-        }else{
-        JOptionPane.showMessageDialog(null, "No se guardo..");
-        }*/
+         boolean encontrado=false;
+        
+        
+         int codigo3=Integer.parseInt(txtCodigo.getText());
+        
+         
+        for (Producto producto1 : ProductoData.lista) {
+            
+           
+                       
+            
+            if(codigo3==producto1.getCodigo()){
+                
+                JOptionPane.showMessageDialog(this, "El producto ya existe debe Actualizar sus datos");
+               return;
+            }
+                    
+        }
+                
+        
+        String codigo1=txtCodigo.getText().trim();
+        
+        String descripcion1=txtDescripcion.getText().trim();
+        
+        String precio1=txtPrecio.getText().trim();
+        
+        Rubro rubro1=(Rubro)comboRubro.getSelectedItem();
+        
+        int stock=(Integer)spinStock.getValue();
       
-        Producto pn=new Producto();
-
-        pn.setCodigo(Integer.parseInt(txtCodigo.getText()));
-        pn.setDescripcion(txtDescripcion.getText());
-        pn.setPrecio(Double.parseDouble(txtPrecio.getText()));
-        pn.setRubro((Rubro)comboRubro.getSelectedItem());
-        pn.setStock((Integer)spinStock.getValue());
-      
+                  
+              
         
-
+        String val="[0-9]*";
+        
+        if(!codigo1.matches(val)){
+        
+        JOptionPane.showMessageDialog(this, "Debe ingresar solo numeros en el codigo ");
+        
+        txtCodigo.requestFocus();
+        return;
+        
+        }
+        
+        
+        if(descripcion1.length()==0){
+        
+        
+        JOptionPane.showMessageDialog(this, "La descripcion no puede estar vacia");
+        
+        txtDescripcion.requestFocus();
+        return;
+                }
+        
+        
+      double preci;
+        
+        try{
+        
+        preci=Double.parseDouble(precio1);
+        
+        
+        
+        }catch(NumberFormatException nf){
+        
+        JOptionPane.showMessageDialog(this, " Debe ingresar un precio");
+        
+        txtPrecio.requestFocus();
+        return;
+        }
     
+        
+        
+          
+       Producto pr2=new Producto();
+       
+       
+       pr2.setCodigo(Integer.parseInt(codigo1));
+       pr2.setDescripcion(descripcion1);
+       pr2.setPrecio(preci);
+       pr2.setRubro(rubro1);
+       pr2.setStock(stock);
+       
+       ProductoData.guardarProducto(pr2);
+            
+               
+        
+        limpiarCampos();
+        
+        desactivarCampos();
+       btnGuardar.setEnabled(false);
+     
+        
+       btnActualizar.setEnabled(true);
+          
       
-      
+       
+       
+       JOptionPane.showMessageDialog(this,"producto guardado");
+        
       
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+      
+        
+        if (txtCodigo.getText().isEmpty()){
+        
+        JOptionPane.showMessageDialog(this, "ingrese el codigo");
+        
+        activaCampos();
+        
+        txtCodigo.requestFocus();
+        return;
+        
+        
+        }
+        
+        
+        boolean encontrado=false;
+        
+        
+         int codigo3=Integer.parseInt(txtCodigo.getText());
+        
+         
+        for (Producto producto1 : ProductoData.lista) {
+            
+           
+                       
+            
+            if(codigo3==producto1.getCodigo()){
+                        
+            
+                               
+        
+        String descripcion1=txtDescripcion.getText().trim();
+        
+        String precio1=txtPrecio.getText().trim();
+        
+        Rubro rubro1=(Rubro)comboRubro.getSelectedItem();
+        
+        int stock=(Integer)spinStock.getValue();
+      
+                  
+       String codigo4=codigo3 + "";
+         
+        
+        String val="[0-9]*";
+        
+        if(!codigo4.matches(val)){
+        
+        JOptionPane.showMessageDialog(this, "Debe ingresar solo numeros en el codigo ");
+        
+        txtCodigo.requestFocus();
+        return;
+        
+        }
+        
+        
+        if(descripcion1.length()==0){
+        
+        
+        JOptionPane.showMessageDialog(this, "La descripcion no puede estar vacia");
+        
+        txtDescripcion.requestFocus();
+        return;
+                }
+        
+        
+      double preci;
+        
+        try{
+        
+        preci=Double.parseDouble(precio1);
+        
+        
+        
+        }catch(NumberFormatException nf){
+        
+        JOptionPane.showMessageDialog(this, " Debe ingresar un precio");
+        
+        txtPrecio.requestFocus();
+        return;
+        }
+    
+        
+        
+          
+       Producto pr2=new Producto();
+       
+       
+       pr2.setCodigo(Integer.parseInt(codigo4));
+       pr2.setDescripcion(descripcion1);
+       pr2.setPrecio(preci);
+       pr2.setRubro(rubro1);
+       pr2.setStock(stock);
+       
+       ProductoData.guardarProducto(pr2);
+            
+               
+        
+        limpiarCampos();
+        
+        desactivarCampos();
+       btnActualizar.setEnabled(false);
+     
+          
+      
+       JOptionPane.showMessageDialog(this,"producto guardado");
+        
+                
+                
+                                
+                
+           
+            
+            
+        }
+        
+        }
+       
+                
+        
+        
+       
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void jBCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCerrarActionPerformed
+     dispose();
+    }//GEN-LAST:event_jBCerrarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<Rubro> comboRubro;
     private javax.swing.JComboBox<String> comboRubro2;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBCerrar;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -386,6 +613,51 @@ public void llenarTabla(){
     comboRubro.addItem(Rubro.PERFUMERIA);
     comboRubro.addItem(Rubro.LIMPIEZA);
     }
+    
+    
+    
+    private void limpiarCampos(){
+        
+            
+            txtCodigo.setText("");
+      txtDescripcion.setText("");
+      txtPrecio.setText("");
+      comboRubro.setSelectedIndex(0);
+      spinStock.setValue(0); 
+      
+            
+      
+      
+              }
+    
+    
+    
+     private void activaCampos(){
+      
+      txtCodigo.setEnabled(true);
+      txtDescripcion.setEnabled(true);
+      txtPrecio.setEnabled(true);
+      comboRubro.setEnabled(true);
+      spinStock.setEnabled(true);
+      
+      
+      }
+      
+      private void desactivarCampos(){
+           
+           
+      
+      txtCodigo.setEnabled(false);
+      txtDescripcion.setEnabled(false);
+      txtPrecio.setEnabled(false);
+      comboRubro.setEnabled(false);
+      spinStock.setEnabled(false);
+      
+      
+      }
+     
+     
+
     
   
     
