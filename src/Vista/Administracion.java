@@ -281,19 +281,35 @@ public class Administracion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboRubroActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        int codigo = Integer.parseInt(txtCodigo.getText());
+       /* int codigo = Integer.parseInt(txtCodigo.getText());
         double precio = Double.parseDouble(txtPrecio.getText());
+        
         int stock = (int) spinStock.getValue();
         
         Rubro rubro = (Rubro) comboRubro.getSelectedItem();
-        //Producto nu = new Producto(codigo,txtDescripcion.getText(),precio,rubro,stock);
-       // ProductoData.guardarProducto(aux);
-       ProductoData.lista.add(new Producto(codigo,txtDescripcion.getText(),precio,rubro,stock));
+        Producto nu = new Producto(codigo,txtDescripcion.getText(),precio,rubro,stock);
+       ProductoData.guardarProducto(nu);
+     //  ProductoData.lista.add(new Producto(codigo,txtDescripcion.getText(),precio,rubro,stock));
       /*  if(ProductoData.lista.contains(nu)){
         JOptionPane.showMessageDialog(null,"Se guardar correctamente");
         }else{
         JOptionPane.showMessageDialog(null, "No se guardo..");
         }*/
+      
+        Producto pn=new Producto();
+
+        pn.setCodigo(Integer.parseInt(txtCodigo.getText()));
+        pn.setDescripcion(txtDescripcion.getText());
+        pn.setPrecio(Double.parseDouble(txtPrecio.getText()));
+        pn.setRubro((Rubro)comboRubro.getSelectedItem());
+        pn.setStock((Integer)spinStock.getValue());
+      
+        
+
+    
+      
+      
+      
     }//GEN-LAST:event_btnGuardarActionPerformed
 
 
@@ -370,4 +386,7 @@ public void llenarTabla(){
     comboRubro.addItem(Rubro.PERFUMERIA);
     comboRubro.addItem(Rubro.LIMPIEZA);
     }
+    
+  
+    
 }

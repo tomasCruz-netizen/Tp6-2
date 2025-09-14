@@ -17,8 +17,7 @@ public class ProductoData {
        
     public static void guardarProducto (Producto aux){
        lista.add(aux);
-   
-    
+  
     }
    
     
