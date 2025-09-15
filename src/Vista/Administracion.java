@@ -430,132 +430,65 @@ public class Administracion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-      
-        
-        if (txtCodigo.getText().isEmpty()){
-        
-        JOptionPane.showMessageDialog(this, "ingrese el codigo");
-        
-        activaCampos();
-        
-        txtCodigo.requestFocus();
-        return;
-        
-        
-        }
-        
-        
-        boolean encontrado=false;
-        
-        
-         int codigo3=Integer.parseInt(txtCodigo.getText());
-        
-         
-        for (Producto producto1 : ProductoData.lista) {
-            
-           
-                       
-            
-            if(codigo3==producto1.getCodigo()){
-                        
-            
-                               
-        
-        String descripcion1=txtDescripcion.getText().trim();
-        
-        String precio1=txtPrecio.getText().trim();
-        
-        Rubro rubro1=(Rubro)comboRubro.getSelectedItem();
-        
-        int stock=(Integer)spinStock.getValue();
-      
-                  
-       String codigo4=codigo3 + "";
-         
-        
-        String val="[0-9]*";
-        
-        if(!codigo4.matches(val)){
-        
-        JOptionPane.showMessageDialog(this, "Debe ingresar solo numeros en el codigo ");
-        
-        txtCodigo.requestFocus();
-        return;
-        
-        }
-        
-        
-        if(descripcion1.length()==0){
-        
-        
-        JOptionPane.showMessageDialog(this, "La descripcion no puede estar vacia");
-        
-        txtDescripcion.requestFocus();
-        return;
-                }
-        
-        
-      double preci;
-        
-        try{
-        
-        preci=Double.parseDouble(precio1);
-        
-        
-        
-        }catch(NumberFormatException nf){
-        
-        JOptionPane.showMessageDialog(this, " Debe ingresar un precio");
-        
-        txtPrecio.requestFocus();
-        return;
-        }
-    
-        
-        
-          
-       Producto pr2=new Producto();
-       
-       
-       pr2.setCodigo(Integer.parseInt(codigo4));
-       pr2.setDescripcion(descripcion1);
-       pr2.setPrecio(preci);
-       pr2.setRubro(rubro1);
-       pr2.setStock(stock);
-       
-       ProductoData.guardarProducto(pr2);
-            
-               
-        
-        limpiarCampos();
-        
-        desactivarCampos();
-       btnActualizar.setEnabled(false);
      
-          
-      
-       JOptionPane.showMessageDialog(this,"producto guardado");
+                 activaCampos();
+              
+            if (txtCodigo.getText().trim().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Debe ingresar el código del producto a actualizar.");
+         txtCodigo.requestFocus();
+            return;
+    }
+
+    try {
+     
+        int codigo = Integer.parseInt(txtCodigo.getText().trim());
+        String descripcion = txtDescripcion.getText().trim();
+        double precio = Double.parseDouble(txtPrecio.getText().trim());
+        Rubro rubro = (Rubro) comboRubro.getSelectedItem();
+        int stock = (Integer) spinStock.getValue();
+
         
-                
-                
-                                
-                
+            if (descripcion.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "La descripción no puede estar vacía.");
+            txtDescripcion.requestFocus();
+                 return;
+        }
+
+        
+        Producto productoOriginal = new Producto();
+        productoOriginal.setCodigo(codigo);
+
+        // Verificar si el producto existe antes de intentar actualizarlo
+        if (ProductoData.lista.contains(productoOriginal)) {
+            // Borrar el producto original
+            ProductoData.borrarProducto(productoOriginal);
+            
+            // Crear el nuevo objeto con los datos actualizados
+            Producto productoActualizado = new Producto(codigo, descripcion, precio, rubro, stock);
+            
+            
+            ProductoData.guardarProducto(productoActualizado);
+            
+            JOptionPane.showMessageDialog(this, " Producto actualizado con éxito.");
+            
+            
+            limpiarCampos();
+            desactivarCampos();
+            btnActualizar.setEnabled(false);
+
+            // Recargar la tabla para mostrar los cambios
+            llenarTabla();
+            
+        } else {
+            // El producto no fue encontrado, no se puede actualizar
+            JOptionPane.showMessageDialog(this, "El producto con el código " + codigo + " no existe.");
+        }
+    } catch (NumberFormatException nf) {
+        
+        JOptionPane.showMessageDialog(this, "Error de formato: Asegúrese de que el código y el precio sean números válidos.");
+        txtCodigo.requestFocus();
+    }
            
-            
-            
-        }
-        
-        }
-       
-                
-        
-        
-       
-        
-        
-        
-        
-        
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void jBCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCerrarActionPerformed
