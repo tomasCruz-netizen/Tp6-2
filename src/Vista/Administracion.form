@@ -62,7 +62,7 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jBEliminar" min="-2" pref="96" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jScrollPane1" alignment="1" pref="467" max="32767" attributes="0"/>
+                              <Component id="jScrollPane1" alignment="1" pref="483" max="32767" attributes="0"/>
                               <Component id="jPanel2" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -212,7 +212,7 @@
                           <Component id="txtDescripcion" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtPrecio" max="32767" attributes="0"/>
                           <Component id="comboRubro" pref="163" max="32767" attributes="0"/>
-                          <Component id="spinStock" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="spinStock" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                       <Component id="jBCerrar" min="-2" max="-2" attributes="0"/>
@@ -284,7 +284,7 @@
             <Component class="javax.swing.JSpinner" name="spinStock">
               <Properties>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Por defecto"/>
+                  <Color id="Default Cursor"/>
                 </Property>
               </Properties>
               <AuxValues>

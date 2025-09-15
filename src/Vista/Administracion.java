@@ -10,7 +10,7 @@ import static Data.ProductoData.lista;
 import Data.Rubro;
 import Entidades.Producto;
 import java.util.ArrayList;
-import javafx.scene.control.Spinner;
+
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
@@ -22,10 +22,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Administracion extends javax.swing.JInternalFrame {
 
-    private DefaultTableModel modelo;
+    private DefaultTableModel modelo= new DefaultTableModel();
+     public boolean isCellEditable(int fila,int columna){
+    
+    return true;
+    }
+  
     public Administracion() {
      initComponents();
-        modelo = new DefaultTableModel();
+      
+        
         cargarEncabezado();
         llenarCombo();
         llenarCombo1();
@@ -142,7 +148,7 @@ public class Administracion extends javax.swing.JInternalFrame {
                     .addComponent(txtDescripcion)
                     .addComponent(txtPrecio)
                     .addComponent(comboRubro, 0, 163, Short.MAX_VALUE)
-                    .addComponent(spinStock, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spinStock, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(89, 89, 89)
                 .addComponent(jBCerrar)
                 .addGap(65, 65, 65))
@@ -227,7 +233,7 @@ public class Administracion extends javax.swing.JInternalFrame {
                                 .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -525,7 +531,24 @@ int fila=tablaDeProductos.getSelectedRow();
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void tablaDeProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDeProductosMouseClicked
+    int filaSeleccionada= tablaDeProductos.getSelectedRow();
+    
+    /*if (filaSeleccionada!=-1){
+        int codigo= (int) tablaDeProductos.getValueAt(filaSeleccionada, 0);
+        String descripcion = (String)tablaDeProductos.getValueAt(filaSeleccionada, 1);
+       double precio =(double) tablaDeProductos.getValueAt(filaSeleccionada, 2);
+        Rubro rubro = (Rubro) tablaDeProductos.getValueAt(filaSeleccionada, 3);
+        int Stock = (int)tablaDeProductos.getValueAt(filaSeleccionada, 4);
+        
+        txtCodigo.setText(codigo +"");
+        txtDescripcion.setText(descripcion);
+        //txtPrecio.setText(precio+"");
+        comboRubro.setSelectedItem(rubro);
+        spinStock.setValue(Stock);
+    
+    }*/
     jBEliminar.setEnabled(true);
+    btnActualizar.setEnabled(true);
     }//GEN-LAST:event_tablaDeProductosMouseClicked
 
 
