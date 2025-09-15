@@ -8,6 +8,7 @@ package Data;
 import static Data.ProductoData.lista;
 import static Data.Rubro.COMESTIBLE;
 import Entidades.Producto;
+import java.util.Iterator;
 import java.util.TreeSet;
 
 
@@ -28,7 +29,14 @@ public class ProductoData {
    
     
     public static void borrarProducto(Producto p){
-        lista.remove(p);
+        Iterator <Producto> it = lista.iterator();
+        while (it.hasNext()) {
+            Producto next = it.next();
+            if(next.getCodigo()== p.getCodigo())
+                it.remove();
+            
+        }
+        
     }
     
     

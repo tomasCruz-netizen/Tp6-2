@@ -9,6 +9,7 @@ import Data.ProductoData;
 import static Data.ProductoData.lista;
 import Data.Rubro;
 import Entidades.Producto;
+import com.sun.tools.example.debug.expr.ExpressionParserConstants;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -453,21 +454,25 @@ public class Administracion extends javax.swing.JInternalFrame {
             int stock = (Integer) spinStock.getValue();
 
             for (Producto producto : lista) {
-                /*if(producto.getCodigo()==codigo||producto.getDescripcion()==descripcion||
-                   producto.getPrecio()==precio||producto.getRubro()==rubro||producto.getStock()==stock){
-                    JOptionPane.showMessageDialog(this,"no modifico nada revise");
-                }else{}*/
-
-                producto.setCodigo(codigo);
-
-                producto.setDescripcion(descripcion);
-                producto.setPrecio(precio);
-                producto.setRubro(rubro);
-                producto.setStock(stock);
-                JOptionPane.showMessageDialog(this, "producto actualizado");
+                if(producto.getCodigo()== codigo){
+                    
+                    
+                    producto.setDescripcion(descripcion);
+                    producto.setPrecio(precio);
+                    producto.setRubro(rubro);
+                    producto.setStock(stock);
+                    JOptionPane.showMessageDialog(this, "producto actualizado");
+                    
+                }
             }
+               
+                   
+               
 
-        } catch (NullPointerException np) {
+             
+            
+
+        } catch (NumberFormatException np) {
             JOptionPane.showMessageDialog(this, "revise codigos y precio tiene que ser numerico");
 
         }
@@ -515,6 +520,7 @@ int fila=tablaDeProductos.getSelectedRow();
     private void tablaDeProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDeProductosMouseClicked
     int filaSeleccionada= tablaDeProductos.getSelectedRow();
     
+    
     if (filaSeleccionada!=-1){
         int codigo= (int) tablaDeProductos.getValueAt(filaSeleccionada, 0);
         String descripcion = (String)tablaDeProductos.getValueAt(filaSeleccionada, 1);
@@ -523,6 +529,7 @@ int fila=tablaDeProductos.getSelectedRow();
         int Stock = (int)tablaDeProductos.getValueAt(filaSeleccionada, 4);
         
         txtCodigo.setText(codigo +"");
+        txtCodigo.setEditable(false);
         txtDescripcion.setText(descripcion);
         txtPrecio.setText(precio+"");
         comboRubro.setSelectedItem(rubro);
