@@ -22,20 +22,21 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Administracion extends javax.swing.JInternalFrame {
 
-    private DefaultTableModel modelo= new DefaultTableModel();
-     public boolean isCellEditable(int fila,int columna){
+    private DefaultTableModel modelo= new DefaultTableModel(){
     
-    return true;
+       public boolean isCellEditable(int fila,int columna){
+    
+    return false;
     }
+    };
+   
   
     public Administracion() {
      initComponents();
-      
-        
-        cargarEncabezado();
+     cargarEncabezado();
         llenarCombo();
         llenarCombo1();
-               desactivarCampos();
+        desactivarCampos();
        
       
     }
@@ -425,7 +426,7 @@ public class Administracion extends javax.swing.JInternalFrame {
        btnGuardar.setEnabled(false);
      
         
-       btnActualizar.setEnabled(true);
+       
           
       
        
@@ -437,64 +438,40 @@ public class Administracion extends javax.swing.JInternalFrame {
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
      
-                 activaCampos();
-              
-            if (txtCodigo.getText().trim().isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Debe ingresar el código del producto a actualizar.");
-         txtCodigo.requestFocus();
+              if (txtCodigo.getText().isEmpty() || txtDescripcion.getText().isEmpty() || txtPrecio.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No puede dejar campos vacios");
+
             return;
-    }
-
-    try {
-     
-        int codigo = Integer.parseInt(txtCodigo.getText().trim());
-        String descripcion = txtDescripcion.getText().trim();
-        double precio = Double.parseDouble(txtPrecio.getText().trim());
-        Rubro rubro = (Rubro) comboRubro.getSelectedItem();
-        int stock = (Integer) spinStock.getValue();
-
-        
-            if (descripcion.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "La descripción no puede estar vacía.");
-            txtDescripcion.requestFocus();
-                 return;
         }
 
-        
-        Producto productoOriginal = new Producto();
-        productoOriginal.setCodigo(codigo);
+        try {
 
-        // Verificar si el producto existe antes de intentar actualizarlo
-        if (ProductoData.lista.contains(productoOriginal)) {
-            // Borrar el producto original
-            ProductoData.borrarProducto(productoOriginal);
-            
-            // Crear el nuevo objeto con los datos actualizados
-            Producto productoActualizado = new Producto(codigo, descripcion, precio, rubro, stock);
-            
-            
-            ProductoData.guardarProducto(productoActualizado);
-            
-            JOptionPane.showMessageDialog(this, " Producto actualizado con éxito.");
-            
-            
-            limpiarCampos();
-            desactivarCampos();
-            btnActualizar.setEnabled(false);
+            int codigo = Integer.parseInt(txtCodigo.getText().trim());
+            String descripcion = txtDescripcion.getText().trim();
+            double precio = Double.parseDouble(txtPrecio.getText().trim());
+            Rubro rubro = (Rubro) comboRubro.getSelectedItem();
+            int stock = (Integer) spinStock.getValue();
 
-            // Recargar la tabla para mostrar los cambios
-            llenarTabla();
-            
-        } else {
-            // El producto no fue encontrado, no se puede actualizar
-            JOptionPane.showMessageDialog(this, "El producto con el código " + codigo + " no existe.");
+            for (Producto producto : lista) {
+                /*if(producto.getCodigo()==codigo||producto.getDescripcion()==descripcion||
+                   producto.getPrecio()==precio||producto.getRubro()==rubro||producto.getStock()==stock){
+                    JOptionPane.showMessageDialog(this,"no modifico nada revise");
+                }else{}*/
+
+                producto.setCodigo(codigo);
+
+                producto.setDescripcion(descripcion);
+                producto.setPrecio(precio);
+                producto.setRubro(rubro);
+                producto.setStock(stock);
+                JOptionPane.showMessageDialog(this, "producto actualizado");
+            }
+
+        } catch (NullPointerException np) {
+            JOptionPane.showMessageDialog(this, "revise codigos y precio tiene que ser numerico");
+
         }
-    } catch (NumberFormatException nf) {
         
-        JOptionPane.showMessageDialog(this, "Error de formato: Asegúrese de que el código y el precio sean números válidos.");
-        txtCodigo.requestFocus();
-    }
-           
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void jBCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCerrarActionPerformed
@@ -502,7 +479,12 @@ public class Administracion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBCerrarActionPerformed
 
     private void comboRubro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboRubro2ActionPerformed
-     llenarTabla();       
+     llenarTabla(); 
+     
+     jButton2.setEnabled(true);
+     btnActualizar.setEnabled(false);
+     //btnGuardar.setEnabled(true);
+     
     }//GEN-LAST:event_comboRubro2ActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
@@ -533,7 +515,7 @@ int fila=tablaDeProductos.getSelectedRow();
     private void tablaDeProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDeProductosMouseClicked
     int filaSeleccionada= tablaDeProductos.getSelectedRow();
     
-    /*if (filaSeleccionada!=-1){
+    if (filaSeleccionada!=-1){
         int codigo= (int) tablaDeProductos.getValueAt(filaSeleccionada, 0);
         String descripcion = (String)tablaDeProductos.getValueAt(filaSeleccionada, 1);
        double precio =(double) tablaDeProductos.getValueAt(filaSeleccionada, 2);
@@ -542,13 +524,17 @@ int fila=tablaDeProductos.getSelectedRow();
         
         txtCodigo.setText(codigo +"");
         txtDescripcion.setText(descripcion);
-        //txtPrecio.setText(precio+"");
+        txtPrecio.setText(precio+"");
         comboRubro.setSelectedItem(rubro);
         spinStock.setValue(Stock);
+      
     
-    }*/
+    }
+      activaCampos();
     jBEliminar.setEnabled(true);
     btnActualizar.setEnabled(true);
+    jButton2.setEnabled(false);
+    btnGuardar.setEnabled(false);
     }//GEN-LAST:event_tablaDeProductosMouseClicked
 
 
@@ -582,8 +568,8 @@ public void cargarEncabezado(){
   ArrayList<Object> lista = new ArrayList();
    lista.add("Codigo");
    lista.add("Descripcion");
-   lista.add("Precio");
-   lista.add("Categoria");
+   lista.add("precio");
+   lista.add("categoria");
    lista.add("Stock");
     for (Object aux : lista) {
         modelo.addColumn(aux);
@@ -598,7 +584,7 @@ public void llenarTabla(){
    for (Producto aux : ProductoData.lista) {
        
     if(aux.getRubro()==categoria){
-     modelo.addRow(new Object[]{aux.getCodigo(),aux.getDescripcion(),aux.getRubro(),aux.getPrecio(),aux.getStock()});
+     modelo.addRow(new Object[]{aux.getCodigo(),aux.getDescripcion(),aux.getPrecio(),aux.getRubro(),aux.getStock()});
        }
     }
    
