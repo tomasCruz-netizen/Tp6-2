@@ -88,9 +88,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu3.add(jMenuItem5);
 
         jMenuItem6.setText("Consulta por precio");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem6);
 
         jMenuItem7.setText("Consulta por rubro");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem7);
 
         jMenuBar1.add(jMenu3);
@@ -125,8 +135,31 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu2MenuSelected
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-   
+      escritorio.removeAll();
+      escritorio.repaint();
+     ConsultarNombre consultarNombre=new ConsultarNombre();
+     consultarNombre.setVisible(true);
+      escritorio.add(consultarNombre);
+      escritorio.moveToFront(consultarNombre);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+      escritorio.removeAll();
+      escritorio.repaint();
+     ConsultaPrecio consultaPrecio=new ConsultaPrecio();
+     consultaPrecio.setVisible(true);
+      escritorio.add(consultaPrecio);
+      escritorio.moveToFront(consultaPrecio);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+      escritorio.removeAll();
+      escritorio.repaint();
+        ConsultarPorRubro consultarXRubro=new ConsultarPorRubro();
+        consultarXRubro.setVisible(true);
+      escritorio.add(consultarXRubro);
+      escritorio.moveToFront(consultarXRubro);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
      * @param args the command line arguments
