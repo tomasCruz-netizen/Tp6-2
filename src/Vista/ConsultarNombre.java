@@ -42,6 +42,8 @@ public class ConsultarNombre extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTNombre = new javax.swing.JTable();
 
+        setClosable(true);
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Listado por Nombre");
 

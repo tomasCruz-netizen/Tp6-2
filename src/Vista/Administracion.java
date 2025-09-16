@@ -74,6 +74,8 @@ public class Administracion extends javax.swing.JInternalFrame {
         btnActualizar = new javax.swing.JButton();
         jBEliminar = new javax.swing.JButton();
 
+        setClosable(true);
+
         jLabel1.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         jLabel1.setText("Gestion de Producto");
 
