@@ -5,17 +5,27 @@
  */
 package Vista;
 
+import com.sun.tools.jdeps.Graph;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Sutara
  */
 public class MenuPrincipal extends javax.swing.JFrame {
+    
+    fondoPanel fondo =new fondoPanel();
 
     /**
      * Creates new form MenuPrincipal
      */
     public MenuPrincipal() {
+          this.setContentPane(fondo);
         initComponents();
+      
     }
 
     /**
@@ -32,7 +42,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        escritorio = new javax.swing.JDesktopPane();
+        escritorio = new fondoPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -52,17 +62,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        escritorio.setPreferredSize(new java.awt.Dimension(800, 750));
-
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGap(0, 1027, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
+            .addGap(0, 629, Short.MAX_VALUE)
         );
 
         jMenu2.setText("Administracion");
@@ -112,14 +120,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(escritorio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         pack();
@@ -131,7 +141,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      Administracion administracion=new Administracion();
       administracion.setVisible(true);
       escritorio.add(administracion);
-      escritorio.moveToFront(administracion);
+      //escritorio.moveToFront(administracion);
     }//GEN-LAST:event_jMenu2MenuSelected
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -140,7 +150,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      ConsultarNombre consultarNombre=new ConsultarNombre();
      consultarNombre.setVisible(true);
       escritorio.add(consultarNombre);
-      escritorio.moveToFront(consultarNombre);
+      //escritorio.moveToFront(consultarNombre);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
@@ -149,7 +159,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      ConsultaPrecio consultaPrecio=new ConsultaPrecio();
      consultaPrecio.setVisible(true);
       escritorio.add(consultaPrecio);
-      escritorio.moveToFront(consultaPrecio);
+      //escritorio.moveToFront(consultaPrecio);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -158,7 +168,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ConsultarPorRubro consultarXRubro=new ConsultarPorRubro();
         consultarXRubro.setVisible(true);
       escritorio.add(consultarXRubro);
-      escritorio.moveToFront(consultarXRubro);
+      //escritorio.moveToFront(consultarXRubro);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
@@ -197,7 +207,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JPanel escritorio;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -210,4 +220,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     // End of variables declaration//GEN-END:variables
+
+class fondoPanel extends JPanel{
+
+private Image imagen;
+@Override
+public void paint(Graphics g){
+    imagen =new ImageIcon(getClass().getResource("/vista/imagen2.jpg")).getImage();
+    g.drawImage(imagen, 0, 0, getWidth(), getHeight(),this);
+    setOpaque(false);
+    super.paint(g);
+    
+
+}
+
+}
+
 }
