@@ -43,6 +43,12 @@ public class ConsultarPorRubro extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Rubro: ");
 
+        cBRubro.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cBRubroItemStateChanged(evt);
+            }
+        });
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -102,6 +108,10 @@ public class ConsultarPorRubro extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cBRubroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cBRubroItemStateChanged
+        llenarTabla();
+    }//GEN-LAST:event_cBRubroItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
