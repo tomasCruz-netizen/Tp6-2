@@ -5,17 +5,26 @@
  */
 package Vista;
 
+import Data.ProductoData;
+import Entidades.Producto;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Sutara
  */
 public class ConsultarNombre extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ConsultarNombre
-     */
+    private DefaultTableModel modelo= new DefaultTableModel();
+     
+    
+    
     public ConsultarNombre() {
         initComponents();
+        cargarEncabezado();
+        
+        
     }
 
     /**
@@ -27,21 +36,166 @@ public class ConsultarNombre extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextNombre1 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTNombre = new javax.swing.JTable();
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Listado por Nombre");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel2.setText("Ingrese Descripcion");
+
+        jTextNombre1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextNombre1ActionPerformed(evt);
+            }
+        });
+        jTextNombre1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextNombre1KeyReleased(evt);
+            }
+        });
+
+        jTNombre.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
+            }
+        ));
+        jScrollPane1.setViewportView(jTNombre);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(89, 89, 89)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jTextNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jTextNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTextNombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextNombre1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextNombre1ActionPerformed
+
+    private void jTextNombre1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNombre1KeyReleased
+      
+        
+        String texto=jTextNombre1.getText().toLowerCase();
+        
+        borrarFilas();
+        
+    for (Producto aux : ProductoData.lista){
+    
+    if (aux.getDescripcion().toLowerCase().startsWith(texto)){
+    
+    modelo.addRow(new Object[]{
+                   aux.getCodigo(),
+                   aux.getDescripcion(),
+                   aux.getPrecio(),
+                 aux.getRubro(),
+                   aux.getStock()});
+    
+    }
+    }
+        
+         
+        
+        
+    }//GEN-LAST:event_jTextNombre1KeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTNombre;
+    private javax.swing.JTextField jTextNombre1;
     // End of variables declaration//GEN-END:variables
+
+
+
+
+
+
+
+     public void llenarTabla(){
+        borrarFilas();
+        
+       
+   
+        for (Producto aux : ProductoData.lista) {
+       
+  
+        modelo.addRow(new Object[]{aux.getCodigo()
+                                  ,aux.getDescripcion()
+                                  ,aux.getPrecio()
+                                  ,aux.getRubro(),
+                                   aux.getStock()});
+           
+            }
+        }
+    
+    
+   public void cargarEncabezado(){
+  ArrayList<Object> lista = new ArrayList();
+   lista.add("Codigo");
+   lista.add("Descripcion");
+   lista.add("precio");
+   lista.add("categoria");
+   lista.add("Stock");
+    for (Object aux : lista) {
+        modelo.addColumn(aux);
+    }
+   jTNombre.setModel(modelo);
+    }
+   
+   
+   
+    private void borrarFilas(){
+     int numFilas= modelo.getRowCount() -1;
+     for (int i = numFilas; i >= 0; i--) {
+         modelo.removeRow( i );
+         
+     }
+    }
 }
+    
+
+
