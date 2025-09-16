@@ -20,9 +20,11 @@ public class ConsultarPorRubro extends javax.swing.JInternalFrame {
    private DefaultTableModel modelo;
    
     public ConsultarPorRubro() {
+        
+        modelo= new DefaultTableModel();
         initComponents();
         llenarCombo();
-        modelo= new DefaultTableModel();
+       
         cargarEncabezado();
     }
 
