@@ -5,7 +5,6 @@
  */
 package Vista;
 
-import com.sun.tools.jdeps.Graph;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
